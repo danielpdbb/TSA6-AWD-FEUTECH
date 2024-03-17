@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Sign Up Details</title>
+    <style>
+        .photocard {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            transition: 0.3s;
+            border-radius: 5px;
+            transform: rotate(0deg);
+            background: #fff url('path/to/your/background-image.jpg') no-repeat center; /* Optional: Add a background image */
+            background-size: cover; /* Optional: If using a background image */
+            border: 1px solid #ddd; /* Optional: For better definition */
+            width: 400px;
+        }
+
+        .photocard:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+            transform: rotate(-3deg); /* Slight adjustment on hover */
+        }
+
+        .container {
+            padding-top: 20px;
+            display: flex;
+            justify-content: center; /* Center the card horizontally */
+            align-items: center; /* Center the card vertically */
+            min-height: 100vh; /* Full height */
+        }
+
+        .list-group-item {
+            background-color: rgba(255,255,255,0.5); /* Slight transparency */
+        }
+
+        .card-header {
+            background-color: rgba(65, 99, 185, 0.5); /* Slight transparency */
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card photocard">
+            <div class="card-header text-center">
+                HERE ARE YOUR SIGN UP DETAILS
+            </div>
+            <ul class="list-group list-group-flush" id="userDetails">
+                <!-- User details will be injected here -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Retrieve userData from localStorage
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            
+            if (userData) {
+                const userDetailsHtml = `
+                    <li class="list-group-item"><strong>First Name:</strong> ${userData.firstName}</li>
+                    <li class="list-group-item"><strong>Last Name:</strong> ${userData.lastName}</li>
+                    <li class="list-group-item"><strong>Username:</strong> ${userData.username}</li>
+                    <li class="list-group-item"><strong>Email:</strong> ${userData.email}</li>
+                    <li class="list-group-item"><strong>Password:</strong> ${userData.password}</li>
+                    <li class="list-group-item"><strong>Confirm Password:</strong> ${userData.confirmPassword}</li>
+                `;
+                $('#userDetails').html(userDetailsHtml);
+            } else {
+                $('#userDetails').html('<li class="list-group-item">No user data found.</li>');
+            }
+        });
+    </script>
+</body>
+</html>
